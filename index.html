@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ghanashyam | Portfolio</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <style>
+      /* === Base styles === */
+      :root {
+        --bg-main: #020617;
+        --bg-alt: #0b1220;
+        --card-bg: #0f172a;
+        --text-main: #e5e7eb;
+        --text-muted: #9ca3af;
+        --accent: #38bdf8;
+        --accent-soft: rgba(56, 189, 248, 0.2);
+        --border-soft: rgba(148, 163, 184, 0.35);
+        --radius-lg: 18px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        background: radial-gradient(
+          circle at top left,
+          #020617,
+          #020617 45%,
+          #020617 100%
+        );
+        color: var(--text-main);
+      }
+
+      /* === Navbar === */
+      .navbar {
+        transition: background-color 0.3s ease, box-shadow 0.3s ease,
+          padding 0.3s ease;
+        padding: 1rem 0;
+        background-color: transparent;
+      }
+
+      .navbar.scrolled {
+        background-color: rgba(15, 23, 42, 0.98);
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.7);
+        padding: 0.4rem 0;
+      }
+
+      .navbar-brand {
+        font-family: "Montserrat", sans-serif;
+        letter-spacing: 0.05em;
+      }
+
+      .nav-link {
+        font-size: 0.95rem;
+        margin-left: 0.4rem;
+        color: var(--text-muted) !important;
+        position: relative;
+        transition: color 0.2s ease;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0.1rem;
+        width: 0;
+        height: 2px;
+        background: var(--accent);
+        transition: width 0.2s ease;
+      }
+
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 80%;
+      }
+
+      .nav-link.active {
+        color: var(--text-main) !important;
+      }
+
+      /* === Hero === */
+      .hero {
+        min-height: 100vh;
+        padding-top: 90px;
+        padding-bottom: 60px;
+      }
+
+      .hero-title {
+        font-family: "Montserrat", sans-serif;
+        font-size: clamp(2.2rem, 4vw, 3rem);
+        font-weight: 700;
+      }
+
+      .hero-subtitle {
+        color: var(--accent);
+        font-size: 0.95rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .hero-text {
+        max-width: 560px;
+        color: var(--text-muted);
+      }
+
+      .hero-avatar-wrapper {
+        display: inline-flex;
+        padding: 8px;
+        border-radius: 999px;
+        background: radial-gradient(
+          circle at top,
+          var(--accent-soft),
+          transparent 60%
+        );
+      }
+
+      .hero-avatar {
+        width: 260px;
+        height: 260px;
+        object-fit: cover;
+        border-radius: 999px;
+        border: 2px solid var(--accent);
+        box-shadow: 0 22px 60px rgba(8, 47, 73, 0.9);
+      }
+
+      /* === Buttons === */
+      .btn-accent {
+        background: var(--accent);
+        color: #0f172a;
+        font-weight: 600;
+        border-radius: 999px;
+        border: none;
+        transition: transform 0.2s ease, box-shadow 0.2s ease,
+          background 0.2s ease;
+      }
+
+      .btn-accent:hover {
+        background: #0ea5e9;
+        transform: translateY(-1px);
+        box-shadow: 0 14px 35px rgba(8, 47, 73, 0.8);
+      }
+
+      /* === Sections === */
+      .section-padding {
+        padding: 80px 0;
+      }
+
+      .section-title {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 700;
+        font-size: 1.8rem;
+      }
+
+      .section-subtitle {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+      }
+
+      .bg-alt {
+        background: var(--bg-alt);
+      }
+
+      .info-card {
+        background: var(--card-bg);
+        border-radius: var(--radius-lg);
+        padding: 1.2rem 1.3rem;
+        border: 1px solid var(--border-soft);
+        height: 100%;
+        transition: transform 0.2s ease, box-shadow 0.2s ease,
+          border-color 0.2s ease;
+      }
+
+      .info-card h5 {
+        font-size: 0.95rem;
+        margin-bottom: 0.3rem;
+      }
+
+      .info-card p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+
+      .info-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--accent);
+        box-shadow: 0 16px 45px rgba(15, 23, 42, 0.8);
+      }
+
+      /* === Skills === */
+      .skills-card {
+        background: var(--card-bg);
+        border-radius: var(--radius-lg);
+        padding: 1.5rem 1.7rem;
+        border: 1px solid var(--border-soft);
+        height: 100%;
+        transition: transform 0.2s ease, box-shadow 0.2s ease,
+          border-color 0.2s ease;
+      }
+
+      .skills-card h5 {
+        margin-bottom: 0.9rem;
+      }
+
+      .skills-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--accent);
+        box-shadow: 0 16px 45px rgba(15, 23, 42, 0.8);
+      }
+
+      .skill-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .skill-badge {
+        padding: 0.35rem 0.9rem;
+        border-radius: 999px;
+        border: 1px solid var(--border-soft);
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+
+      /* === Projects === */
+      .project-card {
+        background: var(--card-bg);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-soft);
+        overflow: hidden;
+        transition: transform 0.25s ease, box-shadow 0.25s ease,
+          border-color 0.25s ease;
+      }
+
+      .project-card-body {
+        padding: 1.6rem 1.6rem 1.5rem;
+      }
+
+      .project-title {
+        font-size: 1.05rem;
+        margin-bottom: 0.4rem;
+      }
+
+      .project-desc {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        margin-bottom: 0.7rem;
+      }
+
+      .project-tags {
+        font-size: 0.8rem;
+        color: var(--accent);
+        margin-bottom: 0.6rem;
+      }
+
+      .project-link {
+        font-size: 0.85rem;
+        color: var(--text-main);
+        text-decoration: none;
+      }
+
+      .project-link:hover {
+        color: var(--accent);
+      }
+
+      .project-card:hover {
+        transform: translateY(-6px);
+        border-color: var(--accent);
+        box-shadow: 0 20px 55px rgba(15, 23, 42, 0.9);
+      }
+
+      /* === Education === */
+      .timeline-item {
+        background: var(--card-bg);
+        border-radius: var(--radius-lg);
+        border-left: 3px solid var(--accent);
+        padding: 1.5rem 1.7rem;
+        border-top: 1px solid var(--border-soft);
+        border-right: 1px solid var(--border-soft);
+        border-bottom: 1px solid var(--border-soft);
+      }
+
+      .timeline-meta {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+
+      /* === Contact === */
+      .contact-card {
+        background: var(--card-bg);
+        border-radius: var(--radius-lg);
+        padding: 1.8rem 1.9rem;
+        border: 1px solid var(--border-soft);
+      }
+
+      .contact-card h5 {
+        margin-bottom: 0.55rem;
+      }
+
+      .contact-card .form-label {
+        font-size: 0.9rem;
+      }
+
+      .contact-card .form-control {
+        background: #020617;
+        border-radius: 12px;
+        border: 1px solid var(--border-soft);
+        color: var(--text-main);
+        font-size: 0.9rem;
+      }
+
+      .contact-card .form-control:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 0.15rem rgba(56, 189, 248, 0.25);
+      }
+
+      .form-status {
+        font-size: 0.85rem;
+        color: var(--accent);
+      }
+
+      /* === Footer === */
+      .footer {
+        background: #020617;
+        border-top: 1px solid rgba(15, 23, 42, 0.9);
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .footer-links a {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        text-decoration: none;
+      }
+
+      .footer-links a:hover {
+        color: var(--accent);
+      }
+
+      /* === Utilities === */
+      .text-accent {
+        color: var(--accent) !important;
+      }
+
+      /* === Responsive tweaks === */
+      @media (max-width: 767.98px) {
+        .hero {
+          text-align: center;
+        }
+
+        .hero-text {
+          margin-inline: auto;
+        }
+
+        .hero-avatar-wrapper {
+          margin-top: 1.5rem;
+        }
+      }
+
+
+
+#text {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+
+
+    </style>
+  </head>
+  <body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="80">
+    <!-- Navbar -->
+    <nav
+      id="mainNav"
+      class="navbar navbar-expand-lg navbar-dark fixed-top bg-transparent"
+    >
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#hero"
+          >Ghanashyam<span class="text-accent">.</span></a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav align-items-lg-center">
+            <li class="nav-item">
+              <a class="nav-link active" href="#hero">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#skills">Skills</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#projects">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#education">Education</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Hero Section -->
+    <section id="hero" class="hero d-flex align-items-center">
+      <div class="container">
+        <div class="row align-items-center gy-4">
+          <div class="col-lg-7">
+            <h1 class="hero-title mb-3">
+              Hi, I'm <span class="text-accent" id="text"></span>
+            </h1>
+            <p class="hero-text mb-4">
+              Learning Full-Stack Web Development and Python to become a
+              job-ready developer who can build real-world, scalable
+              applications.
+            </p>
+            <div class="d-flex flex-wrap gap-3">
+              <a href="#projects" class="btn btn-accent px-4 py-2"
+                >View My Projects</a
+              >
+              <a href="#contact" class="btn btn-outline-light px-4 py-2"
+                >Contact Me</a
+              >
+            </div>
+          </div>
+          <div class="col-lg-5 text-lg-end text-center">
+            <!-- Replace with your image -->
+            
+
+
+
+
+
+
+
+
+<script>
+const words = [
+    "Ghanashyam",
+  " Developer",
+  " Engineer",
+  " Student"
+];
+
+let index = 0;
+const textEl = document.getElementById("text");
+
+function changeText() {
+  // show full word
+  textEl.textContent = words[index];
+  textEl.style.opacity = 1;
+
+  // keep visible
+  setTimeout(() => {
+    textEl.style.opacity = 0;
+
+    // move to next word
+    index = (index + 1) % words.length;
+
+    // show next
+    setTimeout(changeText, 300);
+  }, 2000);
+}
+
+changeText();
+</script>
+
+
+
+
+      
+  
+<!-- <script src="https://cdn.lordicon.com/lordicon.js"></script>
+<lord-icon
+    src="https://cdn.lordicon.com/ejjkasim.json"
+    trigger="loop"
+    delay="2000"
+    colors="primary:#38bdf8,secondary:#ffffff"
+    style="width:250px;height:250px">
+</lord-icon> -->
+
+
+<script src="https://cdn.lordicon.com/lordicon.js"></script>
+<lord-icon
+    src="https://cdn.lordicon.com/upgronsr.json"
+    trigger="loop"
+    delay="2000"
+    style="width:550px;height:550px">
+</lord-icon>
+
+
+
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- About Section -->
+    <section id="about" class="section-padding">
+      <div class="container">
+        <div class="section-header text-center mb-5">
+          <h2 class="section-title">About Me</h2>
+          <p class="section-subtitle">Student · Developer · Learner</p>
+        </div>
+        <div class="row gy-4 align-items-center">
+          <div class="col-lg-6">
+            <p class="mb-3">
+              I am a B.Tech Mechanical Engineering student with a strong
+              interest in software development, problem-solving, and building
+              meaningful digital products.
+            </p>
+            <p class="mb-3">
+              Currently learning Full-Stack Web Development and Python, and
+              focusing on writing clean, maintainable code while understanding
+              core computer science and engineering fundamentals.
+            </p>
+            <p class="mb-0">
+              My career goal is to become a job-ready developer who can
+              contribute to real-world applications, collaborate with teams, and
+              continuously improve as technologies evolve.
+            </p>
+          </div>
+          <div class="col-lg-6">
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="info-card">
+                  <h5>Current Degree</h5>
+                  <p>B.Tech in Mechanical Engineering</p>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="info-card">
+                  <h5>Focus Areas</h5>
+                  <p>Web Dev, Python, Problem Solving</p>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="info-card">
+                  <h5>Strengths</h5>
+                  <p>Curious, consistent, logical thinker</p>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="info-card">
+                  <h5>Goals</h5>
+                  <p>Job-ready full-stack / backend dev</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Skills Section -->
+    <section id="skills" class="section-padding bg-alt">
+      <div class="container">
+        <div class="section-header text-center mb-5">
+          <h2 class="section-title">Skills</h2>
+          <p class="section-subtitle">Technologies &amp; tools I'm learning</p>
+        </div>
+        <div class="row g-4 justify-content-center">
+          <div class="col-md-4">
+            <div class="skills-card">
+              <h5>Frontend</h5>
+              <div class="skill-badges">
+                <span class="skill-badge">HTML</span>
+                <span class="skill-badge">CSS</span>
+                <span class="skill-badge">JavaScript</span>
+                <span class="skill-badge">Bootstrap</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="skills-card">
+              <h5>Backend &amp; Data</h5>
+              <div class="skill-badges">
+                <span class="skill-badge">Python</span>
+                <span class="skill-badge">SQL</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="skills-card">
+              <h5>Tools &amp; Workflow</h5>
+              <div class="skill-badges">
+                <span class="skill-badge">Git</span>
+                <span class="skill-badge">GitHub</span>
+                <span class="skill-badge">VS Code</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Projects Section -->
+    <section id="projects" class="section-padding">
+      <div class="container">
+        <div class="section-header text-center mb-5">
+          <h2 class="section-title">Projects</h2>
+          <p class="section-subtitle">
+            Placeholder projects while I build real ones
+          </p>
+        </div>
+        <div class="row g-4">
+          <!-- Project Card 1 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="project-card h-100">
+              <div class="project-card-body">
+                <h5 class="project-title">Portfolio Website</h5>
+                <p class="project-desc">
+                  A responsive personal portfolio website to showcase my skills,
+                  projects, and journey as a Mechanical Engineering student
+                  learning web development.
+                </p>
+                <p class="project-tags">HTML · CSS · Bootstrap · JavaScript</p>
+                <a href="#" class="project-link">View Code (Soon)</a>
+              </div>
+            </div>
+          </div>
+          <!-- Project Card 2 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="project-card h-100">
+              <div class="project-card-body">
+                <h5 class="project-title">Python Mini Project</h5>
+                <p class="project-desc">
+                  A small Python project (e.g., CLI tool or automation script)
+                  to practice logic, functions, and working with files or APIs.
+                </p>
+                <p class="project-tags">Python · CLI · Automation</p>
+                <a href="#" class="project-link">View Code (Soon)</a>
+              </div>
+            </div>
+          </div>
+          <!-- Project Card 3 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="project-card h-100">
+              <div class="project-card-body">
+                <h5 class="project-title">SQL Practice Dashboard</h5>
+                <p class="project-desc">
+                  A simple data exploration project using SQL queries on sample
+                  datasets to practice joins, aggregations, and reporting.
+                </p>
+                <p class="project-tags">SQL · Data · Reporting</p>
+                <a href="#" class="project-link">View Code (Soon)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Education Section -->
+    <section id="education" class="section-padding bg-alt">
+      <div class="container">
+        <div class="section-header text-center mb-5">
+          <h2 class="section-title">Education</h2>
+          <p class="section-subtitle">Academic background</p>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="timeline-item">
+              <h5>B.Tech in Mechanical Engineering</h5>
+              <p class="timeline-meta">
+                Konark Institute of Science and Technology · Bhubaneswar ·
+                2nd-Year
+              </p>
+              <p class="mb-0">
+                Coursework in core mechanical subjects while actively exploring
+                programming, web development, and software tools to blend
+                engineering with technology.
+              </p>
+            </div>
+            <!-- Add more timeline items if needed -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding">
+      <div class="container">
+        <div class="section-header text-center mb-5">
+          <h2 class="section-title">Contact</h2>
+          <p class="section-subtitle">Let's connect and build something</p>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="contact-card">
+              <div class="row g-4">
+                <div class="col-md-5">
+                  <h5>Contact Details</h5>
+                  <p class="mb-2">
+                    Open to internships, beginner roles, and collaboration.
+                  </p>
+                  <ul class="list-unstyled small mb-0">
+                    <li>
+                      <span class="text-accent">Email:</span>
+                      ranajittiria@gmail.com
+                    </li>
+                    <li>
+                      <span class="text-accent">Location:</span> Bhubaneswar,
+                      India
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-7">
+                  <form id="contactForm">
+                    <div class="mb-3">
+                      <label for="name" class="form-label">Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Your name"
+                        required=""
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="email" class="form-label">Email</label>
+                      <input
+                        type="email"
+                        id="email"
+                        class="form-control"
+                        placeholder="you@example.com"
+                        required=""
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="message" class="form-label">Message</label>
+                      <textarea
+                        id="message"
+                        class="form-control"
+                        rows="3"
+                        placeholder="Your message..."
+                        required=""
+                      ></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-accent w-100">
+                      Send Message
+                    </button>
+                    <p id="formStatus" class="form-status mt-2"></p>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer py-3">
+      <div
+        class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2"
+      >
+        <p class="mb-0 small">© 2025 Your Name. All rights reserved.</p>
+        <div class="footer-links">
+          <a
+            href="https://github.com/yourusername"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub</a
+          >
+          <a
+            href="https://www.linkedin.com/in/ghanashyamt/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >LinkedIn</a
+          >
+
+ <a
+            href="http://instagram.com/ig_kumar_7231/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >instagram</a
+          >
+
+          <a href="#hero">Back to top</a>
+        </div>
+      </div>
+    </footer>
+    <!-- Bootstrap 5 Bundle (JS) -->
+    <p>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    </p>
+    <!-- Custom JS -->
+    <p>
+      <script>
+        // Navbar background change on scroll
+        window.addEventListener("scroll", () => {
+          const navbar = document.querySelector(".navbar");
+          if (window.scrollY > 50) {
+            navbar.classList.add("scrolled");
+          } else {
+            navbar.classList.remove("scrolled");
+          }
+        });
+
+        // Smooth scrolling for nav links (extra control beyond CSS behavior)
+        document
+          .querySelectorAll('a.nav-link[href^="#"], a[href="#hero"]')
+          .forEach((link) => {
+            link.addEventListener("click", (e) => {
+              const targetId = link.getAttribute("href");
+              if (targetId.startsWith("#")) {
+                e.preventDefault();
+                const target = document.querySelector(targetId);
+                if (target) {
+                  window.scrollTo({
+                    top: target.offsetTop - 70, // offset for fixed navbar
+                    behavior: "smooth",
+                  });
+                }
+              }
+            });
+          });
+
+        // Simple fake contact form handler
+        const contactForm = document.getElementById("contactForm");
+        const formStatus = document.getElementById("formStatus");
+
+        if (contactForm) {
+          contactForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            // Basic front-end validation (HTML5 required attributes already help)
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const message = document.getElementById("message").value.trim();
+
+            if (!name || !email || !message) {
+              formStatus.textContent = "Please fill in all fields.";
+              formStatus.style.color = "#f97373";
+              return;
+            }
+
+            // Show success message (replace with real backend / email service later)
+            formStatus.textContent =
+              "Thank you! Your message has been recorded (demo only).";
+            formStatus.style.color = "#38bdf8";
+
+            // Clear fields after short delay
+            setTimeout(() => {
+              contactForm.reset();
+            }, 500);
+          });
+        }
+
+
+
+
+
+
+
+      </script>
+    </p>
+  </body>
+</html>
